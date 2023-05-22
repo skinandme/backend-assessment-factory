@@ -13,6 +13,92 @@ We would like you to build a small Python web application (preferably using the 
     1.  weekly
     2.  montly
 
+```mermaid
+flowchart LR
+    subgraph shipping-provider
+      fictional-system
+    end
+    style shipping-provider stroke-dasharray: 5 5
+    style fictional-system stroke-dasharray: 5 5
+
+    subgraph skin-and-me
+      system
+    end
+
+    system-- orders-->fictional-system
+    fictional-system-- events-->system
+```
+
+#### Sending orders to the fictional shipping provider
+
+The fictional provider would expect to receive a `POST` request in a JSON format containing the following data:
+
+| field | value | description |
+| --- | --- | --- |
+| `order_id` | `str(35)` | Unique identifier for the order |
+| `delivery_service` | `str` | The expected delivery service, this can either be `standard` or `express` |
+| `items` | `list[dict]` | A list of items to deliver, and their quantity (see `items` schema defined below) |
+| `delivery_address` | `dict` | The delivery address (see `delivery_address` schema defined below) |
+
+`items` schema
+| field | value | description |
+| --- | --- | --- |
+| `item_id` | `str(35)` | Unique identifier for the item |
+| `quantity` | `int` | Quantity of items |
+| `weight` | `int` | Weight |
+
+`delivery_address` schema
+| field | value | description |
+| --- | --- | --- |
+| `recipient` | `str(35)` | Name of the recipient |
+| `line_1` | `str(35)` | Address line 1 |
+| `line_2` | `str(35)` | Address line 2 |
+| `city` | `str(35)` | City |
+| `postcode` | `str(35)` | Postcode |
+| `country` | `str(2)` | Country code (`GB`) |
+
+Example:
+```json
+{
+    "order_id": "co-1",
+    "delivery_service": "standard",
+    "items": [{
+        "item_id": "it-1",
+        "quantity": 2,
+        "weight": 10,
+    }],
+    "delivery_address": {
+        "recipient": "John Doe",
+        "line_1": "The battleship building",
+        "line_2": "179 harrow road",
+        "city": "London",
+        "postcode": "W2 6NB",
+        "country": "GB",
+    }
+}
+```
+
+#### Receiving events from the fictional shipping provider
+
+Events coming from the fictional provider would be communicated to our system via webhook `POST` requests in a JSON format:
+
+| field | value | description |
+| --- | --- | --- |
+| `order_id` | `str(35)` | Unique identifier for the order |
+| `event_name` | `str` | The event name: `waiting-for-collection`, `in-transit`, `delivered`, `failed-to-deliver` |
+| `event_time` | `datetime` | Time of when the event occurred |
+
+Example:
+```json
+{
+    "order_id": "co-1",
+    "event_name": "in-transit",
+    "event_time": "2023-05-19 13:18:45",
+}
+```
+
+This request would expect our system to reply with a 200 response to validate it received it correctly.
+
 ### Tips
 1.  Feel free to seed your database with static customer orders, we don't expect you to build an interface to create orders.
 2.  We don't expect you to integrate to a real shipping provider. Just use a fictional endpoint where you could send orders to.
