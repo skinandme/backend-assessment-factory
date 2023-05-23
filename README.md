@@ -99,12 +99,6 @@ Example:
 
 This request would expect our system to reply with a 200 response to validate it received it correctly.
 
-### Tips
-1.  Feel free to seed your database with static customer orders, we don't expect you to build an interface to create orders.
-2.  We don't expect you to integrate to a real shipping provider. Just use a fictional endpoint where you could send orders to.
-3.  This is obviously a broad task, we don't expect you to create something that is fully functional.
-4.  By giving you a lot of freedom we want you to be able to demonstrate your skills in terms of how to structure a codebase.
-
 ## Further Guidance
 So you know what we are looking for, the following is a list of themes we will use to assess your work.
 
