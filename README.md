@@ -108,12 +108,12 @@ This request would expect our system to reply with a 200 response to validate it
 ## Further Guidance
 So you know what we are looking for, the following is a list of themes we will use to assess your work.
 
-- Knowledge and understanding of Python, Relational Databases and general backend development (to a lesser extent, we will also be considering your knowledge of SQLAlchemy and Flask, but this will not form the majority of the assessment).
-- Data models definition
+- Knowledge and understanding of Python, Relational Databases and general backend development.
+- Data models definition.
 - Understanding of architecture and system design.
 - Clean code and use of standards.
 - Awareness of testing and testability.
 - Consideration given to productionisation.
 - Comments in your code for anything you want to convey your thought process or what you might do given more time.
 - README on how to start your project, plus any other information you feel is relevant.
-- We would like you to create a private repository in your github account and commit your code to it. We would urge you to commit relatively frequently so we can get an idea of your style and approach
+- We would like you to create a private repository in your github account and commit your code to it. We would urge you to commit relatively frequently so we can get an idea of your style and approach.
