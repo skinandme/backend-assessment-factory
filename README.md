@@ -11,7 +11,7 @@ We would like you to build a small Python web application (preferably using the 
     4.  failed to deliver
 3.  Produce a mechanism to ship customer orders periodically based on their scheduled shipping interval
     1.  weekly
-    2.  montly
+    2.  monthly
 
 ```mermaid
 flowchart LR
