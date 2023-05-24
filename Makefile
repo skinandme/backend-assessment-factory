@@ -31,7 +31,6 @@ deps:  ## Install Python requirements in virtual environment
 	$(PYTHON) -m pip install -r requirements.txt
 	$(PYTHON) -m pip install pytest
 
-
 .PHONY: tests
 tests:  ## Run tests from virtual environment
 	$(PYTHON) -m pytest tests/
