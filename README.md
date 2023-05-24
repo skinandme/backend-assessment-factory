@@ -37,17 +37,17 @@ The fictional provider would expect to receive a `POST` request in a JSON format
 | --- | --- | --- |
 | `order_id` | `str(35)` | Unique identifier for the order |
 | `delivery_service` | `str` | The expected delivery service, this can either be `standard` or `express` |
-| `items` | `list[dict]` | A list of items to deliver, and their quantity (see `items` schema defined below) |
-| `delivery_address` | `dict` | The delivery address (see `delivery_address` schema defined below) |
+| `items` | `list[Item]` | A list of items to deliver, and their quantity (see `Item` schema defined below) |
+| `delivery_address` | `DeliveryAddress` | The delivery address (see `DeliveryAddress` schema defined below) |
 
-`items` schema
+`Item` schema
 | field | value | description |
 | --- | --- | --- |
 | `item_id` | `str(35)` | Unique identifier for the item |
 | `quantity` | `int` | Quantity of items |
-| `weight` | `int` | Weight |
+| `weight` | `int` | Weight in grams |
 
-`delivery_address` schema
+`DeliveryAddress` schema
 | field | value | description |
 | --- | --- | --- |
 | `recipient` | `str(35)` | Name of the recipient |
@@ -99,7 +99,39 @@ Example:
 
 This request would expect our system to reply with a 200 response to validate it received it correctly.
 
+## Boilerplate code
+
+We provided some boilerplate code for you to get going faster, feel free to use it, or start from scratch if you feel like it.
+
+Start the application and a MySQL database:
+```
+make start
+```
+
+It should have created two containers (`backend-assessment-factory-app-1` and `backend-assessment-factory-db-1`).
+You should now be able to curl: http://0.0.0.0:5000/api/health and receive a 200 response saying: "This system is alive!"
+
+Stop the application and the MySQL database:
+```
+make stop
+```
+
+Credentials and secrets can be found under `./environments/dev.txt`
+
+### Testing
+
+Create a virtual environment and install dependencies with
+```
+make venv deps
+```
+
+Then you can run the tests using
+```
+make tests
+```
+
 ## Further Guidance
+
 So you know what we are looking for, the following is a list of themes we will use to assess your work.
 
 - Knowledge and understanding of Python, Relational Databases and general backend development.
