@@ -1,7 +1,7 @@
 # Skin + Me - Tech Assessment - Backend (Factory)
 
 ## The Task
-We would like you to build a small Python web application (preferably using the Flask framework and SQLAlchemy) that integrates to a fictional shipping provider (think about Royal Mail or DHL), and send them customer orders to deliver on a periodic basis.
+We would like you to build a small Python web application (preferably using the Flask framework and SQLAlchemy) that integrates to a fictional shipping provider (think about Royal Mail or DHL), and send them customer orders to deliver on a periodic basis. There are three parts to this task.
 
 1.  Provide an interface to send customer orders to a fictional shipping provider (in the design, keep in mind in the future we could have multiple providers)
 2.  Provide an interface that will allow the shipping provider to communicate events back to our system. Such events could be:
