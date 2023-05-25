@@ -57,7 +57,7 @@ The fictional provider would expect to receive a `POST` request in a JSON format
 | `postcode` | `str(35)` | Postcode |
 | `country` | `str(2)` | Country code (`GB`) |
 
-Example:
+Example
 ```json
 {
     "order_id": "co-1",
@@ -99,9 +99,9 @@ Example:
 
 This request would expect our system to reply with a 200 response to validate it received it correctly.
 
-## Boilerplate code
+## Skeleton code
 
-We provided some boilerplate code for you to get going faster, feel free to use it, or start from scratch if you feel like it.
+Provided is a skeleton application to help you get going faster. Feel free to use it, or start from scratch if you prefer.
 
 Start the application and a MySQL database:
 ```
