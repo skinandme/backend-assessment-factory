@@ -29,7 +29,7 @@ flowchart LR
     fictional-system-- events-->system
 ```
 
-#### Sending orders to the fictional shipping provider
+### Sending orders to the fictional shipping provider
 
 The fictional provider would expect to receive a `POST` request in a JSON format containing the following data:
 
@@ -78,7 +78,7 @@ Example
 }
 ```
 
-#### Receiving events from the fictional shipping provider
+### Receiving events from the fictional shipping provider
 
 Events coming from the fictional provider would be communicated to our system via webhook `POST` requests in a JSON format:
 
