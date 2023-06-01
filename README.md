@@ -36,7 +36,7 @@ The shipping provider expects to receive a `POST` request with a JSON body conta
 | field | value | description |
 | --- | --- | --- |
 | `delivery_service` | `str` | The expected delivery service, this can either be `standard` or `express` |
-| `items` | `list[Item]` | A list of items contained within the order being shipped |
+| `items` | `list[Item]` | A list of items contained within the order being shipped (see `Item` schema defined below) |
 | `delivery_address` | `DeliveryAddress` | The delivery address (see `DeliveryAddress` schema defined below) |
 | `weight` | `int` | The total weight of the items being shipped in this shipment |
 
@@ -54,7 +54,7 @@ The shipping provider expects to receive a `POST` request with a JSON body conta
 | `line_2` | `str` | Address line 2 |
 | `city` | `str` | City |
 | `postcode` | `str` | Postcode |
-| `country` | `str` | Two digit ountry code (`GB`) |
+| `country` | `str` | Two digit country code (`GB`) |
 
 Example
 ```json
