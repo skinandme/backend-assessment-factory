@@ -164,5 +164,3 @@ So you know what we are looking for, the following is a list of themes we will u
 - Comments in your code for anything you want to convey your thought process or what you might do given more time
 - README on how to start your project, plus any other information you feel is relevant
 - We would like you to create a private repository in your github account and commit your code to it. We would urge you to commit relatively frequently so we can get an idea of your style and approach
-
-
