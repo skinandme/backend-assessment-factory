@@ -1,10 +1,10 @@
 # Skin + Me - Tech Assessment - Backend (Factory)
 
 ## The Task
-We would like you to build a small Python web application (preferably using the Flask framework and SQLAlchemy) that integrates to a fictional shipping provider (think about Royal Mail or DHL), and send them customer orders to deliver on a periodic basis. There are three parts to this task.
+We would like you to build a small Python web application, preferably using the Flask framework and SQLAlchemy. The application should allow Skin + Me to periodically ship customer orders via a shipping provider such as Royal Mail or DHL. There are three parts to this task.
 
-1.  Provide an interface to send customer orders to a fictional shipping provider (in the design, keep in mind in the future we could have multiple providers)
-2.  Provide an interface that will allow the shipping provider to communicate events back to our system. Such events could be:
+1.  Provide an API endpoint to submit a Skin + Me customer order to the shipping provider, utilising the shipping provider’s API. Keep in mind in the future we could have multiple providers
+2.  Provide an API endpoint that will allow the shipping provider to communicate status updates relating to the customer order back to our system. Such statuses could be:
     1.  waiting for collection
     2.  in transit
     3.  delivered
@@ -16,88 +16,107 @@ We would like you to build a small Python web application (preferably using the 
 ```mermaid
 flowchart LR
     subgraph shipping-provider
-      fictional-system
+      shipping-system
     end
     style shipping-provider stroke-dasharray: 5 5
-    style fictional-system stroke-dasharray: 5 5
+    style shipping-system stroke-dasharray: 5 5
 
     subgraph skin-and-me
       system
     end
 
-    system-- orders-->fictional-system
-    fictional-system-- events-->system
+    system-- orders-->shipping-system
+    shipping-system-- status updates-->system
 ```
 
-### Sending orders to the fictional shipping provider
+### Submitting customer orders to the shipping provider
 
-The fictional provider would expect to receive a `POST` request in a JSON format containing the following data:
+The shipping provider expects to receive a `POST` request with a JSON body containing the following data:
 
 | field | value | description |
 | --- | --- | --- |
-| `order_id` | `str(35)` | Unique identifier for the order |
 | `delivery_service` | `str` | The expected delivery service, this can either be `standard` or `express` |
-| `items` | `list[Item]` | A list of items to deliver, and their quantity (see `Item` schema defined below) |
+| `items` | `list[Item]` | A list of items contained within the order being shipped |
 | `delivery_address` | `DeliveryAddress` | The delivery address (see `DeliveryAddress` schema defined below) |
+| `weight` | `int` | The total weight of the items being shipped in this shipment |
 
 `Item` schema
 | field | value | description |
 | --- | --- | --- |
-| `item_id` | `str(35)` | Unique identifier for the item |
-| `quantity` | `int` | Quantity of items |
-| `weight` | `int` | Weight in grams |
+| `description` | `str` | The item's description |
+| `quantity` | `int` | Quantity of the item |
 
 `DeliveryAddress` schema
 | field | value | description |
 | --- | --- | --- |
-| `recipient` | `str(35)` | Name of the recipient |
-| `line_1` | `str(35)` | Address line 1 |
-| `line_2` | `str(35)` | Address line 2 |
-| `city` | `str(35)` | City |
-| `postcode` | `str(35)` | Postcode |
-| `country` | `str(2)` | Country code (`GB`) |
+| `recipient` | `str` | Name of the recipient |
+| `line_1` | `str` | Address line 1 |
+| `line_2` | `str` | Address line 2 |
+| `city` | `str` | City |
+| `postcode` | `str` | Postcode |
+| `country` | `str` | Two digit ountry code (`GB`) |
 
 Example
 ```json
 {
-    "order_id": "co-1",
     "delivery_service": "standard",
-    "items": [{
-        "item_id": "it-1",
-        "quantity": 2,
-        "weight": 10,
-    }],
+    "items": [
+        {
+            "description": "Moisturiser, 50ml",
+            "quantity": 2
+        },
+        {
+            "description": "Cleanser, 100ml",
+            "quantity": 1
+        }
+    ],
     "delivery_address": {
         "recipient": "John Doe",
         "line_1": "The battleship building",
         "line_2": "179 harrow road",
         "city": "London",
         "postcode": "W2 6NB",
-        "country": "GB",
-    }
+        "country": "GB"
+    },
+    "weight": 300
 }
 ```
 
-### Receiving events from the fictional shipping provider
-
-Events coming from the fictional provider would be communicated to our system via webhook `POST` requests in a JSON format:
+Upon a successful response, the shipping provider will return a 200 with a JSON body containing the following data:
 
 | field | value | description |
 | --- | --- | --- |
-| `order_id` | `str(35)` | Unique identifier for the order |
-| `event_name` | `str` | The event name: `waiting-for-collection`, `in-transit`, `delivered`, `failed-to-deliver` |
-| `event_time` | `datetime` | Time of when the event occurred |
+| `shipment_id` | `str` | The shipping provider's unique identifier for the shipment created for the order. This will be returned in any communication from the shipping provider relating to this shipment |
+| `status` | `str` | The shipment’s status: `waiting-for-collection`, `in-transit`, `delivered`, `failed-to-deliver` |
+
+Example
+```json
+{
+    "shipment_id": "SHI-123ABC",
+    "status": "waiting-for-collection"
+}
+```
+
+### Receiving status updates from the shipping provider
+
+Status updates from the shipping provider would be communicated to our system via `POST` requests in a JSON format:
+
+| field | value | description |
+| --- | --- | --- |
+| `shipment_id` | `str` | The shipping provider's unique identifier for the shipment |
+| `status` | `str` | The shipment’s new status: `waiting-for-collection`, `in-transit`, `delivered`, `failed-to-deliver` |
+| `event_time` | `datetime` | When the event occurred |
 
 Example:
 ```json
 {
-    "order_id": "co-1",
-    "event_name": "in-transit",
+    "shipment_id": "SHI-123ABC",
+    "status": "in-transit",
     "event_time": "2023-05-19 13:18:45",
 }
 ```
 
-This request would expect our system to reply with a 200 response to validate it received it correctly.
+The shipping provider expects our system to reply with a 200 response to indicate the request was successful.
 
 ## Skeleton code
 
@@ -134,12 +153,16 @@ make tests
 
 So you know what we are looking for, the following is a list of themes we will use to assess your work.
 
-- Knowledge and understanding of Python, Relational Databases and general backend development.
-- Data models definition.
-- Understanding of architecture and system design.
-- Clean code and use of standards.
-- Awareness of testing and testability.
-- Consideration given to productionisation.
-- Comments in your code for anything you want to convey your thought process or what you might do given more time.
-- README on how to start your project, plus any other information you feel is relevant.
-- We would like you to create a private repository in your github account and commit your code to it. We would urge you to commit relatively frequently so we can get an idea of your style and approach.
+
+- Use of patterns where appropriate
+- Sensible relational database structure
+- Understanding of architecture and system design
+- Understanding of SOLID principles
+- Clean code and use of standards
+- Awareness of testing and testability
+- Consideration given to productionisation
+- Comments in your code for anything you want to convey your thought process or what you might do given more time
+- README on how to start your project, plus any other information you feel is relevant
+- We would like you to create a private repository in your github account and commit your code to it. We would urge you to commit relatively frequently so we can get an idea of your style and approach
+
+
