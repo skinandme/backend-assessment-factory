@@ -1,15 +1,15 @@
 # Skin + Me - Tech Assessment - Backend (Factory)
 
 ## The Task
-We would like you to build a small Python web application, preferably using the Flask framework and SQLAlchemy. The application should allow Skin + Me to periodically ship customer orders via a shipping provider such as Royal Mail or DHL. There are three parts to this task.
+We would like you to build a small Python web application, preferably using the Flask framework and SQLAlchemy. The application should allow Skin + Me to periodically ship customer orders via a shipping provider such as Royal Mail or DHL. There are three parts to this task:
 
-1.  Provide an API endpoint to submit a Skin + Me customer order to the shipping provider, utilising the shipping provider’s API. Keep in mind in the future we could have multiple providers
-2.  Provide an API endpoint that will allow the shipping provider to communicate status updates relating to the customer order back to our system. Such statuses could be:
+1.  Provide an API endpoint to submit a Skin + Me customer order to the shipping provider. The endpoint should utilise the shipping provider’s API. Keep in mind in future we could have multiple shipping providers
+2.  Provide an API endpoint that will allow the shipping provider to communicate status updates relating to a customer order. Such statuses could be:
     1.  waiting for collection
     2.  in transit
     3.  delivered
     4.  failed to deliver
-3.  Produce a mechanism to ship customer orders periodically based on their scheduled shipping interval
+3.  Produce a mechanism to ship customer orders periodically based on the customer's scheduled shipping interval
     1.  weekly
     2.  monthly
 
@@ -31,7 +31,7 @@ flowchart LR
 
 ### Submitting customer orders to the shipping provider
 
-The shipping provider expects to receive a `POST` request with a JSON body containing the following data:
+The shipping provider's API expects to receive a `POST` request with a JSON body containing the following data:
 
 | field | value | description |
 | --- | --- | --- |
@@ -99,7 +99,7 @@ Example
 
 ### Receiving status updates from the shipping provider
 
-Status updates from the shipping provider would be communicated to our system via `POST` requests in a JSON format:
+Status updates from the shipping provider would be communicated to our system via `POST` requests with a JSON body:
 
 | field | value | description |
 | --- | --- | --- |
@@ -154,7 +154,7 @@ make tests
 In completing this exercise, we'd like you to showcase your technical skills and your understanding of sound software engineering principles. Please treat it as you would any production feature you might develop at work. 
 
 So you know what we are looking for, the following is a list of themes we will use to assess your work.
-- Use of patterns where appropriate
+- Use of design patterns where appropriate
 - Sensible relational database structure
 - Understanding of architecture and system design
 - Understanding of SOLID principles
