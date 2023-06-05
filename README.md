@@ -151,9 +151,9 @@ make tests
 
 ## Further Guidance
 
+In completing this exrcise, we'd like you to showcase your technical skills and your understanding of sound software engineering principles. Please treat it as your would any production feature you might develop at work. 
+
 So you know what we are looking for, the following is a list of themes we will use to assess your work.
-
-
 - Use of patterns where appropriate
 - Sensible relational database structure
 - Understanding of architecture and system design
@@ -163,4 +163,7 @@ So you know what we are looking for, the following is a list of themes we will u
 - Consideration given to productionisation
 - Comments in your code for anything you want to convey your thought process or what you might do given more time
 - README on how to start your project, plus any other information you feel is relevant
-- We would like you to create a private repository in your github account and commit your code to it. We would urge you to commit relatively frequently so we can get an idea of your style and approach
+
+We would like you to create a private repository in your github account and commit your code to it. We would urge you to commit relatively frequently so we can get an idea of your style and approach.
+
+Good luck!
