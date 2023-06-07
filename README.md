@@ -151,7 +151,7 @@ make tests
 
 ## Further Guidance
 
-In completing this exercise, we'd like you to showcase your technical skills and your understanding of sound software engineering principles. Please treat it as you would any production feature you might develop at work. 
+In completing this exercise, we'd like you to showcase your technical skills and your understanding of sound software engineering principles. Please treat it as you would any production feature you might develop at work. This is as much a coding task as it is a system design exercise, so we would like you to consider the constraints, tradeoffs, and limitations; and to state your assumptions. 
 
 So you know what we are looking for, the following is a list of themes we will use to assess your work.
 - Use of design patterns where appropriate
