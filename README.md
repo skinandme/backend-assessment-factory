@@ -1,7 +1,11 @@
 # Skin + Me - Tech Assessment - Backend (Factory)
 
 ## The Task
-We would like you to build a small Python web application, preferably using the Flask framework and SQLAlchemy. The application should allow Skin + Me to periodically ship customer orders via a shipping provider such as Royal Mail or DHL. There are three parts to this task:
+We would like you to build a small Python web application, preferably using the Flask framework and SQLAlchemy. The application should allow Skin + Me to periodically ship customer orders via a shipping provider such as Royal Mail or DHL. 
+
+_In the context of this task, a customer order should be interpreted as a subscription. That gets re-used to create and send new orders._
+
+There are three parts to this task:
 
 1.  Provide an API endpoint to submit a Skin + Me customer order to the shipping provider. The endpoint should utilise the shipping provider’s API. Keep in mind in future we could have multiple shipping providers
 2.  Provide an API endpoint that will allow the shipping provider to communicate status updates relating to a customer order. Such statuses could be:
@@ -128,7 +132,7 @@ make start
 ```
 
 It should have created two containers (`backend-assessment-factory-app-1` and `backend-assessment-factory-db-1`).
-You should now be able to curl: http://0.0.0.0:5000/api/health and receive a 200 response saying: "This system is alive!"
+You should now be able to curl: <http://0.0.0.0:5000/api/health> and receive a 200 response saying: "This system is alive!"
 
 Stop the application and the MySQL database:
 ```
