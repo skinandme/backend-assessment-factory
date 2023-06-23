@@ -3,7 +3,7 @@
 ## The Task
 We would like you to build a small Python web application, preferably using the Flask framework and SQLAlchemy. The application should allow Skin + Me to periodically ship customer orders via a shipping provider such as Royal Mail or DHL. 
 
-_In the context of this task, a customer order should be interpreted as a subscription. That gets re-used to create and send new orders._
+_In the context of this task, a customer order should be interpreted as a subscription that gets re-used to create and send new orders._
 
 There are three parts to this task:
 
